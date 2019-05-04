@@ -158,6 +158,11 @@ void HairballAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffe
     }
 }
 
+AudioProcessorValueTreeState& HairballAudioProcessor::getState()
+{
+    return *state;
+}
+
 //==============================================================================
 bool HairballAudioProcessor::hasEditor() const
 {

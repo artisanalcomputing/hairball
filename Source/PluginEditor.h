@@ -29,8 +29,16 @@ public:
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
-    Slider driveKnob;
-    Slider range
+    Slider mDriveSlider;
+    Slider mRangeSlider;
+    Slider mBlendSlider;
+    Slider mVolumeSlider;
+    
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> driveAttachment;
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> rangeAttachment;
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> blendAttachment;
+    std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> volumeAttachment;
+    
     
     
     HairballAudioProcessor& processor;

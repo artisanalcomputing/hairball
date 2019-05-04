@@ -54,8 +54,13 @@ public:
     //==============================================================================
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
-
+    
+    AudioProcessorValueTreeState& getState();
+    
+    
 private:
+    std::unique_ptr<AudioProcessorValueTreeState> state;
+    
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HairballAudioProcessor)
 };
