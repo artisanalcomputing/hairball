@@ -19,36 +19,35 @@ class HairballAudioProcessor  : public AudioProcessor
 {
 public:
     //==============================================================================
-//    HairballAudioProcessor();
-                                HairballAudioProcessor()
-                                             : parameters (*this, nullptr, Identifier ("Hairball"),
-                                         {
-                                             std::make_unique<AudioParameterFloat> ("drive",            // parameterID
-                                                                                    "Drive",            // parameter name
-                                                                                    0.0f,              // minimum value
-                                                                                    1.0f,              // maximum value
-                                                                                    0.5f),             // default value
-                                             std::make_unique<AudioParameterFloat> ("range",      // parameterID
-                                                                                   "Range",     // parameter name
-                                                                                   0.0f,              // minimum value
-                                                                                   1.0f,              // maximum value
-                                                                                   0.5f),              // default value
-                                             std::make_unique<AudioParameterFloat> ("blend",      // parameterID
-                                                                                   "Blend",     // parameter name
-                                                                                   0.0f,              // minimum value
-                                                                                   1.0f,              // maximum value
-                                                                                   0.5f),
-                                             std::make_unique<AudioParameterFloat> ("volume",      // parameterID
-                                                                                   "Volume",     // parameter name
-                                                                                   0.0f,              // minimum value
-                                                                                   1.0f,              // maximum value
-                                                                                   0.5f)
-                                         }){
-                                             driveParameter = parameters.getRawParameterValue ("drive");
-                                             rangeParameter = parameters.getRawParameterValue ("range");
-                                             blendParameter = parameters.getRawParameterValue ("blend");
-                                             volumeParameter = parameters.getRawParameterValue ("volume");
-                                         };
+    HairballAudioProcessor()
+                        : parameters (*this, nullptr, Identifier ("Hairball"),
+                             {
+                                 std::make_unique<AudioParameterFloat> ("drive",            // parameterID
+                                                                        "Drive",            // parameter name
+                                                                        0.0f,              // minimum value
+                                                                        1.0f,              // maximum value
+                                                                        0.5f),             // default value
+                                 std::make_unique<AudioParameterFloat> ("range",      // parameterID
+                                                                       "Range",     // parameter name
+                                                                       0.0f,              // minimum value
+                                                                       1.0f,              // maximum value
+                                                                       0.5f),              // default value
+                                 std::make_unique<AudioParameterFloat> ("blend",      // parameterID
+                                                                       "Blend",     // parameter name
+                                                                       0.0f,              // minimum value
+                                                                       1.0f,              // maximum value
+                                                                       0.5f),
+                                 std::make_unique<AudioParameterFloat> ("volume",      // parameterID
+                                                                       "Volume",     // parameter name
+                                                                       0.0f,              // minimum value
+                                                                       1.0f,              // maximum value
+                                                                       0.5f)
+                             }){
+                                 driveParameter = parameters.getRawParameterValue ("drive");
+                                 rangeParameter = parameters.getRawParameterValue ("range");
+                                 blendParameter = parameters.getRawParameterValue ("blend");
+                                 volumeParameter = parameters.getRawParameterValue ("volume");
+                             };
     ~HairballAudioProcessor(){};
 
     //==============================================================================

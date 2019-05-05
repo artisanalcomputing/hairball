@@ -151,11 +151,23 @@ void HairballAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffe
     // the samples and the outer loop is handling the channels.
     // Alternatively, you can process the samples with the channels
     // interleaved by keeping the same state.
+    
+    driveParameter = parameters.getRawParameterValue("drive");
+    rangeParameter = parameters.getRawParameterValue("range");
+    blendParameter = parameters.getRawParameterValue("blend");
+    volumeParameter = parameters.getRawParameterValue("volume");
+    
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         auto* channelData = buffer.getWritePointer (channel);
 
         // ..do something to the data...
+        for(int sample = 0; sample < buffer.getNumSamples(); sample++)
+        {
+            *channelData *= *driveParameter;
+            
+            channelData++;
+        }
     }
 }
 
