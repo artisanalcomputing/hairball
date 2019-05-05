@@ -164,9 +164,11 @@ void HairballAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffe
         // ..do something to the data...
         for(int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-            *channelData *= *driveParameter;
+            float cleanSig = *channelData;
             
-            *channelData = (2.f / float_Pi) * atan(*channelData);
+            *channelData *= *driveParameter * *rangeParameter;
+            
+            *channelData = ((((2.f / float_Pi) * atan(*channelData) * *blendParameter) + (cleanSig * (1.f / *blendParameter))) / 2) * *volumeParameter;
             
             channelData++;
         }
