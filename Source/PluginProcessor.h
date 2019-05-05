@@ -30,7 +30,7 @@ public:
                                  std::make_unique<AudioParameterFloat> ("range",      // parameterID
                                                                        "Range",     // parameter name
                                                                        0.0f,              // minimum value
-                                                                       1.0f,              // maximum value
+                                                                       3000.0f,              // maximum value
                                                                        0.5f),              // default value
                                  std::make_unique<AudioParameterFloat> ("blend",      // parameterID
                                                                        "Blend",     // parameter name
@@ -40,7 +40,7 @@ public:
                                  std::make_unique<AudioParameterFloat> ("volume",      // parameterID
                                                                        "Volume",     // parameter name
                                                                        0.0f,              // minimum value
-                                                                       1.0f,              // maximum value
+                                                                       3.0f,              // maximum value
                                                                        0.5f)
                              }){
                                  driveParameter = parameters.getRawParameterValue ("drive");
