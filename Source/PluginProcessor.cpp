@@ -168,7 +168,7 @@ void HairballAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffe
             
             *channelData *= *driveParameter * *rangeParameter;
             
-            *channelData = ((((2.f / float_Pi) * atan(*channelData) * *blendParameter) + (cleanSig * (1.f / *blendParameter))) / 2) * *volumeParameter;
+            *channelData = ((((2.f / float_Pi) * atan(*channelData) * *blendParameter) + (cleanSig * (1.f - *blendParameter))) / 2.f) * *volumeParameter;
             
             channelData++;
         }
