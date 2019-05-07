@@ -34,7 +34,7 @@ public:
         //    mDriveSlider.setRange(driveParameter->range.start, driveParameter->range.end);
         //    mDriveSlider.setValue(*driveParameter);
         addAndMakeVisible (mDriveSlider);
-        driveAttachment.reset (new SliderAttachment (valueTreeState, "gain", mDriveSlider));
+        driveAttachment.reset (new SliderAttachment (valueTreeState, "drive", mDriveSlider));
         driveLabel.setText ("Drive", dontSendNotification);
         driveLabel.attachToComponent(&mDriveSlider, false);
         driveLabel.setBounds (30, 80, 100, 30);
