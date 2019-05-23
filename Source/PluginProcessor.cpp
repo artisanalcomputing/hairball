@@ -162,16 +162,14 @@ void HairballAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffe
         auto* channelData = buffer.getWritePointer (channel);
 
         // ..do something to the data...
-        for(int sample = 0; sample < buffer.getNumSamples(); sample++)
-        {
-            float cleanSig = *channelData;
-            
-            *channelData *= *driveParameter * *rangeParameter;
-            
-            *channelData = ((((2.f / float_Pi) * atan(*channelData) * *blendParameter) + (cleanSig * (1.f - *blendParameter))) / 2.f) * *volumeParameter;
-            
-            channelData++;
-        }
+        
+        mDistortion[channel]->processDistort(channelData,
+                                     *driveParameter,
+                                     *rangeParameter,
+                                     *blendParameter,
+                                     *volumeParameter,
+                                     channelData,
+                                     buffer.getNumSamples());
     }
 }
 
@@ -206,6 +204,13 @@ void HairballAudioProcessor::setStateInformation (const void* data, int sizeInBy
     if (xmlState.get() != nullptr)
         if (xmlState->hasTagName (parameters.state.getType()))
             parameters.replaceState (ValueTree::fromXml (*xmlState));
+}
+
+void HairballAudioProcessor::initializeDSP()
+{
+    for(int i = 0; i < 2; i++){
+        mDistortion[i].reset(new HairballDistortion());
+    }
 }
 
 //==============================================================================
