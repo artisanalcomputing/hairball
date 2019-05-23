@@ -11,6 +11,7 @@
 #pragma once
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include "HairballDistortion.h"
 
 //==============================================================================
 /**
@@ -43,6 +44,7 @@ public:
                                                                        3.0f,              // maximum value
                                                                        0.5f)
                              }){
+                                 initializeDSP(); 
                                  driveParameter = parameters.getRawParameterValue ("drive");
                                  rangeParameter = parameters.getRawParameterValue ("range");
                                  blendParameter = parameters.getRawParameterValue ("blend");
@@ -84,8 +86,13 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     
 private:
+    /** internal */
+    void initializeDSP();
 //    std::unique_ptr<AudioProcessorValueTreeState> parameters;
     AudioProcessorValueTreeState parameters;
+    
+    
+    std::unique_ptr<HairballDistortion> mDistortion[2];
     
     float* driveParameter = nullptr;
     float* rangeParameter = nullptr;
