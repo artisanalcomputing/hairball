@@ -12,6 +12,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "HairballDistortion.h"
+#include "HairballParameters.h"
 
 //==============================================================================
 /**
@@ -20,37 +21,8 @@ class HairballAudioProcessor  : public AudioProcessor
 {
 public:
     //==============================================================================
-    HairballAudioProcessor()
-                        : parameters (*this, nullptr, Identifier ("Hairball"),
-                             {
-                                 std::make_unique<AudioParameterFloat> ("drive",            // parameterID
-                                                                        "Drive",            // parameter name
-                                                                        0.0f,              // minimum value
-                                                                        1.0f,              // maximum value
-                                                                        0.5f),             // default value
-                                 std::make_unique<AudioParameterFloat> ("range",      // parameterID
-                                                                       "Range",     // parameter name
-                                                                       0.0f,              // minimum value
-                                                                       3000.0f,              // maximum value
-                                                                       0.5f),              // default value
-                                 std::make_unique<AudioParameterFloat> ("blend",      // parameterID
-                                                                       "Blend",     // parameter name
-                                                                       0.0f,              // minimum value
-                                                                       1.0f,              // maximum value
-                                                                       0.5f),
-                                 std::make_unique<AudioParameterFloat> ("volume",      // parameterID
-                                                                       "Volume",     // parameter name
-                                                                       0.0f,              // minimum value
-                                                                       3.0f,              // maximum value
-                                                                       0.5f)
-                             }){
-                                 initializeDSP(); 
-                                 driveParameter = parameters.getRawParameterValue ("drive");
-                                 rangeParameter = parameters.getRawParameterValue ("range");
-                                 blendParameter = parameters.getRawParameterValue ("blend");
-                                 volumeParameter = parameters.getRawParameterValue ("volume");
-                             };
-    ~HairballAudioProcessor(){};
+    HairballAudioProcessor();
+    ~HairballAudioProcessor();
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -85,12 +57,25 @@ public:
     void getStateInformation (MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     
+    AudioProcessorValueTreeState parameters;
+    
+    AudioProcessorValueTreeState::ParameterLayout createParameterLayout()
+    {
+        std::vector<std::unique_ptr<AudioParameterFloat>> params;
+        
+        for(int i = 0; i < hParameter_TotalNumParameters; i++){
+            params.push_back(std::make_unique<AudioParameterFloat>(
+                                                                   HairballParameterID[i],
+                                                                   HairballParameterLabel[i],
+                                                                   HairballParameterRange[i],
+                                                                   HairballParameterDefaultValue[i]));
+        }
+        return {params.begin(), params.end()};
+    }
+
 private:
     /** internal */
     void initializeDSP();
-//    std::unique_ptr<AudioProcessorValueTreeState> parameters;
-    AudioProcessorValueTreeState parameters;
-    
     
     std::unique_ptr<HairballDistortion> mDistortion[2];
     
