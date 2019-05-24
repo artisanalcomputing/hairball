@@ -4,6 +4,10 @@
               companyName="Artisanal Computing" pluginFormats="buildAU,buildVST"
               companyEmail="artisanalcomputing@gmail.com" version="0.1.1" pluginChannelConfigs="{1, 1}, {2, 2}">
   <MAINGROUP id="jIpEeo" name="Hairball">
+    <GROUP id="{F43AAE34-D0F4-F584-1F22-4C988ECA97F4}" name="Helpers">
+      <FILE id="zxukDe" name="HairballParameters.h" compile="0" resource="0"
+            file="Source/HairballParameters.h"/>
+    </GROUP>
     <GROUP id="{C8081BB8-F0D9-A85E-A635-EE3AE92A1B9C}" name="DSP">
       <FILE id="kGR5aK" name="HairballDistortion.cpp" compile="1" resource="0"
             file="Source/HairballDistortion.cpp"/>

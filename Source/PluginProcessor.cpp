@@ -12,24 +12,33 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-//HairballAudioProcessor::HairballAudioProcessor()
-//#ifndef JucePlugin_PreferredChannelConfigurations
-//     : AudioProcessor (BusesProperties()
-//                     #if ! JucePlugin_IsMidiEffect
-//                      #if ! JucePlugin_IsSynth
-//                       .withInput  ("Input",  AudioChannelSet::stereo(), true)
-//                      #endif
-//                       .withOutput ("Output", AudioChannelSet::stereo(), true)
-//                     #endif
-//                       )
-//#endif
-//{
-//   
-//}
-//
-//HairballAudioProcessor::~HairballAudioProcessor()
-//{
-//}
+HairballAudioProcessor::HairballAudioProcessor()
+#ifndef JucePlugin_PreferredChannelConfigurations
+     : AudioProcessor (BusesProperties()
+                     #if ! JucePlugin_IsMidiEffect
+                      #if ! JucePlugin_IsSynth
+                       .withInput  ("Input",  AudioChannelSet::stereo(), true)
+                      #endif
+                       .withOutput ("Output", AudioChannelSet::stereo(), true)
+                     #endif
+                       )
+#endif
+    : parameters(*this,
+               nullptr,
+               juce::Identifier("Hairball"),
+               createParameterLayout())
+{
+    initializeDSP();
+    
+    driveParameter = parameters.getRawParameterValue ("drive");
+    rangeParameter = parameters.getRawParameterValue ("range");
+    blendParameter = parameters.getRawParameterValue ("blend");
+    volumeParameter = parameters.getRawParameterValue ("volume");
+}
+
+HairballAudioProcessor::~HairballAudioProcessor()
+{
+}
 
 //==============================================================================
 const String HairballAudioProcessor::getName() const
@@ -160,9 +169,8 @@ void HairballAudioProcessor::processBlock (AudioBuffer<float>& buffer, MidiBuffe
     for (int channel = 0; channel < totalNumInputChannels; ++channel)
     {
         auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
         
+        // distortion
         mDistortion[channel]->processDistort(channelData,
                                      *driveParameter,
                                      *rangeParameter,
