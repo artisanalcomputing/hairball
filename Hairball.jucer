@@ -23,6 +23,9 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="LPjuKH" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
+    <GROUP id="{12E0D7CD-C578-6D70-EEC2-09A047789386}" name="Assets">
+      <FILE id="OoI4uW" name="hairball.png" compile="0" resource="1" file="Assets/hairball.png"/>
+    </GROUP>
   </MAINGROUP>
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX">

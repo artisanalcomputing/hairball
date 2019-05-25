@@ -24,9 +24,9 @@ public:
     typedef AudioProcessorValueTreeState::ButtonAttachment ButtonAttachment;
     
     HairballAudioProcessorEditor (HairballAudioProcessor& p, AudioProcessorValueTreeState& vts)
-    : AudioProcessorEditor (&p), processor (p), valueTreeState (vts)
+    : AudioProcessorEditor (&p), valueTreeState(vts), processor (p)
     {
-        setSize (450, 150);
+        setSize (450, 450);
         
         mDriveSlider.setBounds(0, 0, 100, 100);
         mDriveSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
@@ -41,7 +41,7 @@ public:
         addAndMakeVisible (driveLabel);
         
         
-        mRangeSlider.setBounds(100, 0, 100, 100);
+        mRangeSlider.setBounds(getWidth() - 100, 0, 100, 100);
         mRangeSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
         mRangeSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
         addAndMakeVisible(mRangeSlider);
@@ -52,7 +52,7 @@ public:
         addAndMakeVisible (rangeLabel);
         
         
-        mBlendSlider.setBounds(200, 0, 100, 100);
+        mBlendSlider.setBounds(0, getHeight() - 100, 100, 100);
         mBlendSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
         mBlendSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
         addAndMakeVisible(mBlendSlider);
@@ -63,7 +63,7 @@ public:
         addAndMakeVisible (blendLabel);
         
         
-        mVolumeSlider.setBounds(300, 0, 100, 100);
+        mVolumeSlider.setBounds(getWidth() - 100, getHeight() - 100, 100, 100);
         mVolumeSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
         mVolumeSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
         addAndMakeVisible(mVolumeSlider);
@@ -72,6 +72,8 @@ public:
         volumeLabel.attachToComponent(&mVolumeSlider, false);
         volumeLabel.setBounds (330, 80, 100, 30);
         addAndMakeVisible (volumeLabel);
+        
+        mBackgroundImage = ImageCache::getFromMemory(BinaryData::hairball_png,BinaryData::hairball_pngSize);
     }
     ~HairballAudioProcessorEditor() {}
 
@@ -92,12 +94,14 @@ private:
     Label blendLabel;
     Slider mVolumeSlider;
     Label volumeLabel;
-    
+
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> driveAttachment;
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> rangeAttachment;
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> blendAttachment;
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> volumeAttachment;
     
+    
+    Image mBackgroundImage;
     
     HairballAudioProcessor& processor;
 
