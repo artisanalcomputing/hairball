@@ -13,6 +13,8 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "PluginProcessor.h"
 
+#include "HairballLookAndFeel.h"
+
 //==============================================================================
 /**
 */
@@ -28,7 +30,7 @@ public:
     {
         setSize (450, 450);
         
-        mDriveSlider.setBounds(0, 0, 100, 100);
+        mDriveSlider.setBounds(0, 0, 75, 75);
         mDriveSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
         mDriveSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
         //    mDriveSlider.setRange(driveParameter->range.start, driveParameter->range.end);
@@ -36,46 +38,59 @@ public:
         addAndMakeVisible (mDriveSlider);
         driveAttachment.reset (new SliderAttachment (valueTreeState, "drive", mDriveSlider));
         driveLabel.setText ("Drive", dontSendNotification);
-        driveLabel.attachToComponent(&mDriveSlider, false);
+        //driveLabel.attachToComponent(&mDriveSlider, false);
         driveLabel.setBounds (30, 80, 100, 30);
-        addAndMakeVisible (driveLabel);
+        //addAndMakeVisible (driveLabel);
         
         
-        mRangeSlider.setBounds(getWidth() - 100, 0, 100, 100);
+        mRangeSlider.setBounds(getWidth() - 75, 0, 75, 75);
         mRangeSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
         mRangeSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
         addAndMakeVisible(mRangeSlider);
         rangeAttachment.reset (new SliderAttachment (valueTreeState, "range", mRangeSlider));
         rangeLabel.setText ("Range", dontSendNotification);
-        rangeLabel.attachToComponent(&mRangeSlider, false);
+        //rangeLabel.attachToComponent(&mRangeSlider, false);
         rangeLabel.setBounds (130, 80, 100, 30);
-        addAndMakeVisible (rangeLabel);
+        //addAndMakeVisible (rangeLabel);
         
         
-        mBlendSlider.setBounds(0, getHeight() - 100, 100, 100);
+        mBlendSlider.setBounds(0, getHeight() - 75, 75, 75);
         mBlendSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
         mBlendSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
         addAndMakeVisible(mBlendSlider);
         blendAttachment.reset (new SliderAttachment (valueTreeState, "blend", mBlendSlider));
         blendLabel.setText ("Blend", dontSendNotification);
-        blendLabel.attachToComponent(&mBlendSlider, false);
+        //blendLabel.attachToComponent(&mBlendSlider, false);
         blendLabel.setBounds (230, 80, 100, 30);
-        addAndMakeVisible (blendLabel);
+        //addAndMakeVisible (blendLabel);
         
         
-        mVolumeSlider.setBounds(getWidth() - 100, getHeight() - 100, 100, 100);
+        mVolumeSlider.setBounds(getWidth() - 75, getHeight() - 75, 75, 75);
         mVolumeSlider.setSliderStyle(Slider::SliderStyle::RotaryVerticalDrag);
         mVolumeSlider.setTextBoxStyle(Slider::TextEntryBoxPosition::NoTextBox, true, 0, 0);
         addAndMakeVisible(mVolumeSlider);
         blendAttachment.reset (new SliderAttachment (valueTreeState, "volume", mVolumeSlider));
         volumeLabel.setText ("Volume", dontSendNotification);
-        volumeLabel.attachToComponent(&mVolumeSlider, false);
+        //volumeLabel.attachToComponent(&mVolumeSlider, false);
         volumeLabel.setBounds (330, 80, 100, 30);
-        addAndMakeVisible (volumeLabel);
+        //addAndMakeVisible (volumeLabel);
+        
+        titleLabel.setText("HAIRBALL", dontSendNotification);
+        titleLabel.setBounds(getWidth() - (getWidth()/2) - 45, getHeight() - (getHeight()/2) - 30, 100, 30);
+        addAndMakeVisible (titleLabel);
+        
+        mLookAndFeel.reset(new HairballLookAndFeel());
+        setLookAndFeel(&*mLookAndFeel);
+        
+        LookAndFeel::setDefaultLookAndFeel(&*mLookAndFeel);
         
         mBackgroundImage = ImageCache::getFromMemory(BinaryData::hairball_png,BinaryData::hairball_pngSize);
     }
-    ~HairballAudioProcessorEditor() {}
+    
+    ~HairballAudioProcessorEditor()
+    {
+        setLookAndFeel(nullptr);
+    }
 
     //==============================================================================
     void paint (Graphics&) override;
@@ -94,6 +109,7 @@ private:
     Label blendLabel;
     Slider mVolumeSlider;
     Label volumeLabel;
+    Label titleLabel;
 
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> driveAttachment;
     std::unique_ptr<AudioProcessorValueTreeState::SliderAttachment> rangeAttachment;
@@ -104,6 +120,8 @@ private:
     Image mBackgroundImage;
     
     HairballAudioProcessor& processor;
+    
+    std::unique_ptr<HairballLookAndFeel> mLookAndFeel;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (HairballAudioProcessorEditor)
 };

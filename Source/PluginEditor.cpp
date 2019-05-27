@@ -25,6 +25,7 @@ void HairballAudioProcessorEditor::paint (Graphics& g)
 //    g.setColour(Colours::seagreen);
     g.fillAll();
     g.drawImage(mBackgroundImage, getLocalBounds().toFloat());
+    
 //    g.drawFittedText ("HAIRBALL", getLocalBounds(), Justification::centred, 1);
 }
 
