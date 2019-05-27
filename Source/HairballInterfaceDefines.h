@@ -31,5 +31,5 @@ const Colour HairballColour_7 = Colour(125, 125, 125);
 const Colour HairballColour_8 = Colour(35,31,32);
 
 const Font font_1 ("Helvetica Neue", 12.00f, Font::bold);
-const Font font_2 ("Helvetica Neue", 22.00f, Font::bold);
+const Font font_2 ("Helvetica Neue", 40.00f, Font::bold);
 const Font font_3 ("Helvetica Neue", 48.00f, Font::bold);

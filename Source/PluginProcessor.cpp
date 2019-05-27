@@ -189,7 +189,7 @@ bool HairballAudioProcessor::hasEditor() const
 
 AudioProcessorEditor* HairballAudioProcessor::createEditor()
 {
-    return new HairballAudioProcessorEditor (*this, parameters);
+    return new HairballAudioProcessorEditor (*this);
 }
 
 //==============================================================================

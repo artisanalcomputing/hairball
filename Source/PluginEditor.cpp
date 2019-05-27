@@ -11,7 +11,28 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+#include "HairballLookAndFeel.h"
 //==============================================================================
+HairballAudioProcessorEditor::HairballAudioProcessorEditor (HairballAudioProcessor& p)
+    : AudioProcessorEditor (&p), processor (p)
+{
+    setSize (MAIN_PANEL_WIDTH, MAIN_PANEL_HEIGHT);
+    
+    mMainPanel.reset(new HairballMainPanel(&processor));
+    addAndMakeVisible(*mMainPanel);
+    
+    mLookAndFeel.reset(new HairballLookAndFeel());
+    setLookAndFeel(&*mLookAndFeel);
+    LookAndFeel::setDefaultLookAndFeel(&*mLookAndFeel);
+    
+    mBackgroundImage = ImageCache::getFromMemory(BinaryData::hairball_png,BinaryData::hairball_pngSize);
+    
+}
+
+HairballAudioProcessorEditor::~HairballAudioProcessorEditor()
+{
+    setLookAndFeel(nullptr);
+}
 
 
 //==============================================================================

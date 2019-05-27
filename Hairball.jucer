@@ -4,6 +4,16 @@
               companyName="Artisanal Computing" pluginFormats="buildAU,buildVST"
               companyEmail="artisanalcomputing@gmail.com" version="0.1.2" pluginChannelConfigs="{1, 1}, {2, 2}">
   <MAINGROUP id="jIpEeo" name="Hairball">
+    <GROUP id="{D72BE97B-1838-822A-5A43-418D243172E1}" name="Panels">
+      <FILE id="l5VCQR" name="HairballMainPanel.cpp" compile="1" resource="0"
+            file="Source/HairballMainPanel.cpp"/>
+      <FILE id="KqGlOc" name="HairballMainPanel.h" compile="0" resource="0"
+            file="Source/HairballMainPanel.h"/>
+      <FILE id="XITxNN" name="HairballPanelBase.cpp" compile="1" resource="0"
+            file="Source/HairballPanelBase.cpp"/>
+      <FILE id="SS3QKo" name="HairballPanelBase.h" compile="0" resource="0"
+            file="Source/HairballPanelBase.h"/>
+    </GROUP>
     <GROUP id="{223A5BAE-133E-3CEF-E454-76367BB73669}" name="Parameter Control">
       <FILE id="zk59u2" name="HairballParameterSlider.cpp" compile="1" resource="0"
             file="Source/HairballParameterSlider.cpp"/>
