@@ -26,15 +26,17 @@ HairballMainPanel::HairballMainPanel(HairballAudioProcessor* inProcessor)
     
     mRangeSlider.reset(new HairballParameterSlider(mProcessor->parameters, HairballParameterID[hParameter_Range], HairballParameterLabel[hParameter_Range]));
     mRangeSlider->setBounds(getWidth() - slider_size, 0, slider_size, slider_size);
-    
+    mRangeSlider->setPopupDisplayEnabled(true, true, nullptr);
     addAndMakeVisible(*mRangeSlider);
     
     mBlendSlider.reset(new HairballParameterSlider(mProcessor->parameters, HairballParameterID[hParameter_Blend], HairballParameterLabel[hParameter_Blend]));
     mBlendSlider->setBounds(0, getHeight() - slider_size, slider_size, slider_size);
+    mBlendSlider->setPopupDisplayEnabled(true, true, nullptr);
     addAndMakeVisible(*mBlendSlider);
     
     mVolumeSlider.reset(new HairballParameterSlider(mProcessor->parameters, HairballParameterID[hParameter_Volume], HairballParameterLabel[hParameter_Volume]));
     mVolumeSlider->setBounds(getWidth() - slider_size, getHeight() - slider_size, slider_size, slider_size);
+    mVolumeSlider->setPopupDisplayEnabled(true, true, nullptr);
     
     addAndMakeVisible(*mVolumeSlider);
     addMouseListener(this, true);
