@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="LBaNls" name="Hairball" projectType="audioplug" jucerVersion="5.4.3"
               companyName="Artisanal Computing" pluginFormats="buildAU,buildVST"
-              companyEmail="artisanalcomputing@gmail.com" version="0.2.0" pluginChannelConfigs="{1, 1}, {2, 2}">
+              companyEmail="artisanalcomputing@gmail.com" version="0.2.1" pluginChannelConfigs="{1, 1}, {2, 2}">
   <MAINGROUP id="jIpEeo" name="Hairball">
     <GROUP id="{D72BE97B-1838-822A-5A43-418D243172E1}" name="Panels">
       <FILE id="l5VCQR" name="HairballMainPanel.cpp" compile="1" resource="0"
